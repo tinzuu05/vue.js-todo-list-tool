@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=yes">
+    <title>Vue Todo list</title>
+    <link rel="stylesheet" href="css/todo.style.css">
+</head>
+
+
+<body>
+
+    <div id="app">
+        <div class="container">
+            <h1>Vue Todo List</h1>
+
+            <div v-if="isEditing">
+                <input type="text" v-model="todo">
+                <input type="submit" value="update" @click="updateTodo">
+            </div>
+
+            <div v-else>
+                <input type="text" v-model="todo">
+                <input type="submit" value="add" @click="storeTodo">
+            </div>
+
+        </div>
+        <ol>
+            <li v-for="(todo, index) in todos">
+                {{ todo }}
+
+                <button class="edit" @click="editTodo(index, todo)">Edit</button>
+                <button class="delete"  @click="deleteTodo(index)">Delete</button>
+            </li>
+        </ol>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    
+    <script>
+    //add this code for using Vue Devtools successfully
+    Vue.config.devtools = true
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                isEditing: false,
+                selectedIndex: null,
+                todo: '',
+                todos: [
+                    "Add something here",
+                    "Learn JavaScript 30"
+                ],
+            },
+
+            methods: {
+                storeTodo() {
+                    this.todos.push(this.todo);
+                    this.todo = ""
+                },
+
+                editTodo(index, todo) {
+                    this.todo = todo
+                    this.selectedIndex = index
+                    this.isEditing = true
+                },
+
+                updateTodo() {
+                    this.todos.splice(this.selectedIndex, 1, this.todo)
+                    this.isEditing = false
+                    this.todo = ""
+                },
+
+                deleteTodo(index) {
+                    this.todos.splice(index, 1)
+                },
+
+            }
+
+        })
+
+    </script>
+</body>
+
+</html>

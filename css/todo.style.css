@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+h1 {
+    text-align: center;
+    background-color: black;
+    color: white;
+}
+
+input[type=text] {
+    width: 250px;
+    height: 20px;
+}
+
+li {
+    font-weight: 500;
+}
+
+.edit {
+    background-color: cornflowerblue;
+}
+
+.delete {
+    background-color: crimson;
+}
